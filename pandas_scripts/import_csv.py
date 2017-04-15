@@ -9,7 +9,7 @@ Created on Sat Apr 15 13:23:32 2017
 import pandas as pd
 
 def test_run():
-    df = pd.read_csv("data/AAPL.csv")
+    df = pd.read_csv("~/Documents/ml_trade/data/AAPL.csv")
     print(df.head())
     print(df.tail())
     
