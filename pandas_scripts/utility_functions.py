@@ -12,8 +12,9 @@ productive more quickly
 """
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
-def symbol_to_path(symbol, base_dir="~/Documents/ml_trade/data"):
+def symbol_to_path(symbol, base_dir="../data"):
     """Return CSV file path given ticker symbol"""
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
@@ -43,7 +44,7 @@ def get_data(symbols, dates):
                                 na_values=['nan'])
             
             dfSPY = dfSPY.rename(columns={"Adj Close": str(symbol)})
-            df = df.join(dfSPY,how='inner')
+            df = df.join(dfSPY,how='inner') # inner joins and drops NaN
         else:
             df_temp = pd.read_csv(sym_path,
                                   index_col="Date",
@@ -51,9 +52,16 @@ def get_data(symbols, dates):
                                   usecols=["Date","Adj Close"],
                                   na_values=['nan'])
             df_temp = df_temp.rename(columns={"Adj Close": str(symbol)})
-            df = df.join(df_temp)
-        
+            df = df.join(df_temp,how='inner')
+    df = df.sort_index(ascending=True)
     return df
+
+def plot_data(df,title='Stock prices'):
+    '''Plot stock prices'''
+    ax = df.plot(title=title,fontsize=8)
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Price")
+    plt.show() # must be called to show plots in some envs
 
 def test_run():
     # Define a date range
@@ -66,7 +74,22 @@ def test_run():
     
     # Get stock data
     df = get_data(symbols,dates)
-    print(df)
+    #print(df)
     
+    # Slice a by row (daterange)
+    #print(df.loc['2017-04-11':'2017-04-13'])
+    
+    # Slicing by column
+    #print(df['GOOG']) # A single label selects a single column
+    #print(df[['IBM','GOOG']]) # a list of labels selects multiple columns
+    
+    # Slicing by row and column
+    #print(df.loc['2017-04-11':'2017-04-13', ['SPY','IBM']])
+    
+    # Slicing by numerical index location is done using the .iloc[]
+    #print(df.iloc[0,:]) # note you have to use numbers
+    print(df)
+    plot_data(df)
+          
 if __name__ == "__main__":
     test_run()

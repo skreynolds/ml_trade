@@ -14,7 +14,7 @@ def get_mean_volume(symbol):
     symbol. Note: Data for a stock is stored in file:
     data/<symbol.csv>
     """
-    df = pd.read_csv("~/Documents/ml_trade/data/{}.csv".format(symbol)) #read in data
+    df = pd.read_csv("../data/{}.csv".format(symbol)) #read in data
     # TODO: Compute and return the mean volume for this stock
     #return df["Close"].mean() will also work
     length =  len(df["Close"])

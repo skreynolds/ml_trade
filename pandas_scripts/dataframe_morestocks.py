@@ -19,7 +19,7 @@ def test_run():
     df1 = pd.DataFrame(index=dates)
     
     # Read in the SPY data
-    dfSPY = pd.read_csv('~/Documents/ml_trade/data/SPY.csv',
+    dfSPY = pd.read_csv('../data/SPY.csv',
                         index_col='Date',
                         parse_dates=True,
                         usecols=["Date","Adj Close"],
@@ -37,7 +37,7 @@ def test_run():
     
     # For loop reads in more stocks
     for symbol in symbols:
-        df_temp = pd.read_csv("~/Documents/ml_trade/data/{}.csv".format(symbol),
+        df_temp = pd.read_csv("../data/{}.csv".format(symbol),
                               index_col='Date',
                               parse_dates=True,
                               usecols=['Date','Adj Close'],

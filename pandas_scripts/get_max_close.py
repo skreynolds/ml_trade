@@ -14,7 +14,7 @@ def get_max_close(symbol):
     by symbol. Note: data for a stock is stored in the
     file: data/<symbol>.csv
     """
-    df = pd.read_csv("~/Documents/ml_trade/data/{}.csv".format(symbol)) #read in the data
+    df = pd.read_csv("../data/{}.csv".format(symbol)) #read in the data
     return df['Close'].max() #computer and return max
 
 def test_run():

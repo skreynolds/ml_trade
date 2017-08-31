@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def test_run():
-    df = pd.read_csv("~/Documents/ml_trade/data/IBM.csv")
+    df = pd.read_csv("../data/IBM.csv")
     df["High"].plot()
     plt.show()
     
